@@ -12,7 +12,7 @@ import HelloWorld from "./components/HelloWorld.vue";
   >
     <div class="navbar-brand">
       <router-link class="navbar-item" to="/#">
-        <img src="@/assets/logo.svg" alt="" width="122" />
+        <img src="@/assets/logo.svg" alt="" width="122" class="vueIcon" />
       </router-link>
       <span class="navbar-burger burger">
         <span></span>
@@ -35,4 +35,8 @@ import HelloWorld from "./components/HelloWorld.vue";
   </section>
 </template>
 
-<style></style>
+<style scoped>
+.vueIcon {
+  max-height: 2.75rem;
+}
+</style>
