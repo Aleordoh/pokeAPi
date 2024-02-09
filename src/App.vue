@@ -25,6 +25,7 @@ import HelloWorld from "./components/HelloWorld.vue";
         <router-link class="navbar-item" to="/"> Home </router-link>
         <router-link class="navbar-item" to="/about"> About </router-link>
         <router-link class="navbar-item" to="/pokemones">Pokemon</router-link>
+        <router-link class="navbar-item" to="/favoritos">Favoritos</router-link>
       </div>
     </div>
   </nav>

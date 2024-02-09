@@ -8,7 +8,7 @@ getData("https://pokeapi.co/api/v2/pokemon?limit=10"); //ejecuto la funcion getD
 
 <template>
   <div class="columns">
-    <dic class="column">
+    <div class="column">
       <section class="hero has-background-light">
         <div class="hero-body has-text-centered">
           <div class="container content-wrapper">
@@ -20,7 +20,6 @@ getData("https://pokeapi.co/api/v2/pokemon?limit=10"); //ejecuto la funcion getD
               <button class="delete" @click="back">Volver</button>
               {{ serverError }}
             </div>
-
             <div class="columns is-multiline" v-if="data">
               <div
                 v-for="pokemon in data.results"
@@ -65,7 +64,7 @@ getData("https://pokeapi.co/api/v2/pokemon?limit=10"); //ejecuto la funcion getD
           </div>
         </div>
       </section>
-    </dic>
+    </div>
   </div>
 </template>
 <style scoped>
