@@ -25,9 +25,9 @@ getData("https://pokeapi.co/api/v2/pokemon?limit=10"); //ejecuto la funcion getD
                 v-for="pokemon in data.results"
                 class="column is-4-desktop is-one-fifth-widescreen is-half-tablet"
               >
-                <article class="tile is-child box">
-                  <figure class="image">
-                    <img src="@/assets/pngwing.png" width="" />
+                <div class="box">
+                  <figure class="image is-96x96">
+                    <img src="@/assets/pngwing.jpg" />
                   </figure>
                   <p class="subtitle">{{ pokemon.name }}</p>
                   <router-link
@@ -36,7 +36,7 @@ getData("https://pokeapi.co/api/v2/pokemon?limit=10"); //ejecuto la funcion getD
                   >
                     Ver Datos
                   </router-link>
-                </article>
+                </div>
               </div>
             </div>
           </div>
@@ -70,5 +70,11 @@ getData("https://pokeapi.co/api/v2/pokemon?limit=10"); //ejecuto la funcion getD
 <style scoped>
 .withButtons {
   justify-content: center;
+}
+.box{
+display: flex;
+flex-direction: column;
+align-items: center;
+
 }
 </style>

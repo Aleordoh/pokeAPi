@@ -1,10 +1,15 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
 import { useGetData } from "@/composables/getData";
+import { useFavoritosStore } from "@/store/favoritos";
 
 const route = useRoute(); //useRoute permite acceder a los parametros de la ruta
 const router = useRouter();
-const { getData, data, loading, serverError } = useGetData();
+
+const { getData, data, loading, serverError } = useGetData(); //instancio al composable  useGetData
+const favoritosStore = useFavoritosStore()//instancio useFavoritosSto
+const {add} = favoritosStore
+
 getData(`https://pokeapi.co/api/v2/pokemon/${route.params.name}`);
 
 const back = () => {
@@ -13,17 +18,13 @@ const back = () => {
 </script>
 
 <template>
-  <section class="section">
+  <section class="hero">
     <div class="container">
       <div v-if="loading" class="notification is-success">Cargando...</div>
       <div v-if="serverError" class="notification is-danger">
         <button class="delete" @click="back">Volver</button>
         El pokemon solicitado no existe...
       </div>
-    </div>
-  </section>
-  <section class="section">
-    <div class="container">
       <div v-if="data">
         <div class="card">
           <header class="card-header">
@@ -34,7 +35,7 @@ const back = () => {
               </span>
             </button>
           </header>
-          <div class="card-image">
+          <div class="box">
             <figure class="image is-128x128">
               <img :src="data.sprites?.front_default" alt="" height="" />
             </figure>
@@ -62,7 +63,14 @@ const back = () => {
             </div>
           </div>
           <footer class="card-footer">
-            <a class="button is-warning is-small" @click="back"> Volver </a>
+            <div class="buttons">
+              <a class="button is-link is-small is-outlined" @click="back">
+                Volver
+              </a>
+              <a class="button is-link is-small is-outlined" @click="add(data)">
+                Add Favorito
+              </a>
+            </div>
           </footer>
         </div>
       </div>

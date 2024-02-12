@@ -4,12 +4,7 @@ import HelloWorld from "./components/HelloWorld.vue";
 </script>
 
 <template>
-  <nav
-    id="mainNav"
-    class="navbar staticBar is-fixed-top is-info"
-    role="navigation"
-    aria-label="main navigation"
-  >
+  <nav id="mainNav" class="navbar staticBar is-fixed-top is-info" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <router-link class="navbar-item" to="/#">
         <img src="@/assets/logo.svg" alt="" width="122" class="vueIcon" />
@@ -29,10 +24,8 @@ import HelloWorld from "./components/HelloWorld.vue";
       </div>
     </div>
   </nav>
-  <section class="hero is-fullheight-with-navbar">
-    <div class="hero-body">
-      <RouterView />
-    </div>
+  <section class="section">
+    <RouterView />
   </section>
 </template>
 
