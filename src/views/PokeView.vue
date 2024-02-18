@@ -7,8 +7,8 @@ const route = useRoute(); //useRoute permite acceder a los parametros de la ruta
 const router = useRouter();
 
 const { getData, data, loading, serverError } = useGetData(); //instancio al composable  useGetData
-const favoritosStore = useFavoritosStore()//instancio useFavoritosSto
-const {add} = favoritosStore
+const favoritosStore = useFavoritosStore(); //instancio useFavoritosSto
+const { add } = favoritosStore;
 
 getData(`https://pokeapi.co/api/v2/pokemon/${route.params.name}`);
 
@@ -18,72 +18,80 @@ const back = () => {
 </script>
 
 <template>
-  <section class="hero">
-    <div class="container">
-      <div v-if="loading" class="notification is-success">Cargando...</div>
-      <div v-if="serverError" class="notification is-danger">
-        <button class="delete" @click="back">Volver</button>
-        El pokemon solicitado no existe...
-      </div>
-      <div v-if="data">
-        <div class="card">
-          <header class="card-header">
-            <p class="card-header-title">{{ data.name }}</p>
-            <button class="card-header-icon" aria-label="more options">
-              <span class="icon">
-                <i class="fas fa-angle-down" aria-hidden="true"></i>
-              </span>
-            </button>
-          </header>
-          <div class="box">
-            <figure class="image is-128x128">
-              <img :src="data.sprites?.front_default" alt="" height="" />
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <div>
-                <p class="poke">Experiencia:</p>
-                <ul class="poke">
-                  <li>
-                    {{ data.base_experience }}
-                  </li>
-                </ul>
-              </div>
-              <br />
-              <div>
-                <p class="poke">Tipo:</p>
-                <ul class="poke">
-                  <li v-for="slot in data.types">
-                    {{ slot.type.name }}
-                    <br />
-                  </li>
-                </ul>
-              </div>
+  <div class="columns">
+    <div class="column is-half is-offset-one-quarter">
+      <section class="hero has-background-light">
+        <div class="hero-body has-text-centered">
+          <div class="container content-wrapper">
+            <div v-if="loading" class="notification is-success">
+              <p>Cargando...</p>
             </div>
-          </div>
-          <footer class="card-footer">
-            <div class="buttons">
-              <a class="button is-link is-small is-outlined" @click="back">
-                Volver
-              </a>
-              <a class="button is-link is-small is-outlined" @click="add(data)">
-                Add Favorito
-              </a>
+            <div v-if="serverError" class="notification is-danger">
+              <button class="delete" @click="back">Volver</button>
+              <p>El pokemon solicitado no existe...</p>
             </div>
-          </footer>
+            <section v-if="data" class="hero is-primary">
+              <div class="hero-body">
+                <div class="container">
+                  <div class="box">
+                    <p class="subtitle is-3 has-text-black">
+                      {{ data.name }}
+                    </p>
+                    <article class="media">
+                      <div class="media-left">
+                        <figure class="image is-128x128">
+                          <img :src="data.sprites?.front_default" alt="Image" />
+                        </figure>
+                      </div>
+                      <div class="media-content">
+                        <div class="content">
+                          <div class="has-text-left">
+                            <p>Experiencia: {{ data.base_experience }}</p>
+
+                            <p class="mb-0">Tipo:</p>
+                            <ol class="poke mt-0">
+                              <li v-for="slot in data.types">
+                                {{ slot.type.name }}
+                                <br />
+                              </li>
+                            </ol>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                    <div class="media footer-box">
+                      <a @click="back" class="level-item" aria-label="reply">
+                        <span class="icon has-text-success">
+                          <i class="fas fa-reply" aria-hidden="true"></i>
+                        </span>
+                      </a>
+                      <a
+                        @click="add(data)"
+                        class="level-item"
+                        aria-label="like"
+                      >
+                        <span class="icon has-text-danger">
+                          <i class="fas fa-heart" aria-hidden="true"></i>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
-  </section>
+  </div>
 </template>
 
 <style scoped>
-p.poke {
-  font-weight: bold;
-  margin-bottom: 0px;
+ol.poke {
+  margin-left: 50px;
+  text-align: left;
 }
-ul.poke {
-  margin-top: 0px;
+.footer-box {
+  justify-content: center;
 }
 </style>

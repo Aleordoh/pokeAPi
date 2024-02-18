@@ -7,10 +7,14 @@ export const useFavoritosStore = defineStore('favoritos', () => {
 
   const add = (poke) => {//accion
     favoritos.value.push(poke)
-    console.log(favoritos.value);
+  }
+
+  const removeFav = (id) => {
+    favoritos.value = favoritos.value.filter((item) => item.id !== id)
   }
   return {
     favoritos,
     add,
+    removeFav,
   }
 })
