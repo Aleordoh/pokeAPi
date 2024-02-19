@@ -1,10 +1,12 @@
 <script setup>
 import { useFavoritosStore } from "@/store/favoritos";
 import { storeToRefs } from "pinia";
+//import { RouterLink } from "vue-router";
+
 
 const favoritosStore = useFavoritosStore();
 const { favoritos } = storeToRefs(favoritosStore); //solo las propiedades computadas (computed) o los datos reactivos se extraesn con storeToRef
-const {removeFav} = favoritosStore
+const { removeFav } = favoritosStore;
 </script>
 
 <template>
@@ -39,7 +41,20 @@ const {removeFav} = favoritosStore
                     </div>
                   </div>
                   <footer class="card-footer">
-                    <button @click="removeFav(pokemon.id)" class="button is-danger is-small card-footer-item">Quitar de Favoritos</button>
+                    <div class="buttons">
+                      <button
+                        @click="removeFav(pokemon.id)"
+                        class="button is-danger is-small card-footer-item"
+                      >
+                        Quitar
+                      </button>
+                      <router-link
+                        :to="`/pokemones/${pokemon.name}`"
+                        class="button is-info is-small card-footer-item"
+                      >
+                        Más Informacion
+                      </router-link>
+                    </div>
                   </footer>
                 </div>
               </div>
@@ -50,3 +65,8 @@ const {removeFav} = favoritosStore
     </div>
   </div>
 </template>
+<style scoped>
+.card-footer {
+  justify-content: center;
+}
+</style>

@@ -8,7 +8,7 @@ const router = useRouter();
 
 const { getData, data, loading, serverError } = useGetData(); //instancio al composable  useGetData
 const favoritosStore = useFavoritosStore(); //instancio useFavoritosSto
-const { add } = favoritosStore;
+const { add, bloqFavBtn } = favoritosStore;
 
 getData(`https://pokeapi.co/api/v2/pokemon/${route.params.name}`);
 
@@ -60,20 +60,27 @@ const back = () => {
                       </div>
                     </article>
                     <div class="media footer-box">
-                      <a @click="back" class="level-item" aria-label="reply">
-                        <span class="icon has-text-success">
-                          <i class="fas fa-reply" aria-hidden="true"></i>
-                        </span>
-                      </a>
-                      <a
-                        @click="add(data)"
-                        class="level-item"
-                        aria-label="like"
-                      >
-                        <span class="icon has-text-danger">
-                          <i class="fas fa-heart" aria-hidden="true"></i>
-                        </span>
-                      </a>
+                      <div class="buttons">
+                        <button
+                          @click="back"
+                          class="button is-rounded level-item "
+                          aria-label="reply"
+                        >
+                          <span class="icon has-text-success">
+                            <i class="fas fa-reply" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                        <button
+                          @click="add(data)"
+                          :disabled="bloqFavBtn(data.name)"
+                          class="button is-rounded level-item"
+                          aria-label="like"
+                        >
+                          <span class="icon has-text-danger">
+                            <i class="fas fa-heart" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -88,7 +95,6 @@ const back = () => {
 
 <style scoped>
 ol.poke {
-  margin-left: 50px;
   text-align: left;
 }
 .footer-box {
